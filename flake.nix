@@ -22,12 +22,13 @@
                                             config =
                                                 {
                                                     environment.systemPackages = [
-                                                        implementation-parameters.config.sally.download-dependencies.services.server
+                                                        # implementation-parameters.config.sally.download-dependencies.services.server
+                                                        implementation-parameters.config.sally.download-dependencies.frontend.mobile
                                                     ] ;
                                                     environment.variables =
                                                         {
                                                             # SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
-                                                            DOWNLOAD_NODE = implementation-parameters.config.sally.download-dependencies.services.server ;
+                                                            DOWNLOAD_NODE = implementation-parameters.config.sally.download-dependencies.frontend.mobile ;
                                                         } ;
                                                     systemd =
                                                         {
@@ -72,6 +73,39 @@
                                                         {
                                                             download-dependencies =
                                                                 {
+                                                                    frontend =
+                                                                        {
+                                                                            mobile =
+                                                                                implementation-parameters.lib.mkOption
+                                                                                    {
+                                                                                        default =
+                                                                                            implementation-parameters.pkgs.writeShellApplication
+                                                                                                {
+                                                                                                    name = "download" ;
+                                                                                                    runtimeInputs =
+                                                                                                        [
+                                                                                                            implementation-parameters.pkgs.coreutils
+                                                                                                            implementation-parameters.pkgs.findutils
+                                                                                                            implementation-parameters.pkgs.gradle
+                                                                                                            ( failure 4734451342324564 )
+                                                                                                        ] ;
+                                                                                                        text =
+                                                                                                            ''
+                                                                                                                GRADLE_USER_HOME="$( mktemp --dry-run )" || failure 6182679945594691
+                                                                                                                export GRADLE_USER_HOME
+                                                                                                                trap "rm --recursive --force $GRADLE_USER_HOME" EXIT
+                                                                                                                gradle help dependencies
+                                                                                                                rm -rf gradle-dependencies
+                                                                                                                cp --recursive "$GRADLE_USER_HOME/caches/modules-2" gradle-dependencies/
+                                                                                                                find gradle-dependencies \
+                                                                                                                    -type f \
+                                                                                                                    \( -name '*.lock' -o -name 'gc.properties' \) \
+                                                                                                                    -delete
+                                                                                                            '' ;
+                                                                                                } ;
+                                                                                        type = implementation-parameters.lib.types.package ;
+                                                                                    } ;
+                                                                        } ;
                                                                     services =
                                                                         {
                                                                             server =
@@ -107,38 +141,6 @@
 #                                                                {
 #                                                                    mobile =
 #                                                                        {
-#                                                                            download =
-#                                                                                implementation-parameters.lib.mkOption
-#                                                                                    {
-#                                                                                        default =
-#                                                                                            implementation-parameters.pkgs.writeShellApplication
-#                                                                                                {
-#                                                                                                    name = "download" ;
-#                                                                                                    runtimeInputs =
-#                                                                                                        [
-#                                                                                                            implementation-parameters.pkgs.coreutils
-#                                                                                                            implementation-parameters.pkgs.findutils
-#                                                                                                            implementation-parameters.pkgs.gradle
-#                                                                                                            ( failure 4734451342324564 )
-#                                                                                                        ] ;
-#                                                                                                        text =
-#                                                                                                            ''
-#                                                                                                                GRADLE_USER_HOME="$( mktemp --dry-run )" || failure 6182679945594691
-#                                                                                                                export GRADLE_USER_HOME
-#                                                                                                                trap "rm --recursive --force $GRADLE_USER_HOME" EXIT
-#                                                                                                                rm --recursive --force "$GRADLE_USER_HOME"
-#                                                                                                                gradle assembleDebug
-#                                                                                                                rm -rf gradle-dependencies
-#                                                                                                                mkdir --parents gradle-dependencies
-#                                                                                                                cp --recursive "$GRADLE_USER_HOME/caches/modules-2" gradle-dependencies/
-#                                                                                                                find gradle-dependencies \
-#                                                                                                                    -type f \
-#                                                                                                                    \( -name '*.lock' -o -name 'gc.properties' \) \
-#                                                                                                                    -delete
-#                                                                                                            '' ;
-#                                                                                                } ;
-#                                                                                        type = implementation-parameters.lib.types.package ;
-#                                                                                    } ;
 #                                                                            package =
 #                                                                                implementation-parameters.lib.mkOption
 #                                                                                    {
