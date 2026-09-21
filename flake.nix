@@ -23,7 +23,7 @@
                                                 {
                                                     environment.systemPackages = [
                                                         implementation-parameters.config.sally.download-dependencies.services.server
-                                                        implementation-parameters.config.sally.download-dependencies.frontend.mobile
+                                                        implementation-parameters.config.sally.download-dependencies.frontend.mobile.package
                                                     ] ;
                                                     environment.variables =
                                                         {
