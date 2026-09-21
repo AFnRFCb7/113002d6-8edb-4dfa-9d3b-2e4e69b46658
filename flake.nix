@@ -190,7 +190,7 @@
                                                                                                             echo "WORK_DIR=$WORK_DIR"
                                                                                                             cd "$WORK_DIR"
                                                                                                             cp --recursive "${./frontend/mobile}/." .
-                                                                                                            ./gradlew build --offline
+                                                                                                            gradle build --offline
                                                                                                             mkdir --parents "$out"
                                                                                                             cp build/outputs/... "$out"/
                                                                                                         '' ;
