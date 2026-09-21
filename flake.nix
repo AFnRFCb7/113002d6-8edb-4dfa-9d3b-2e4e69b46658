@@ -22,7 +22,7 @@
                                                 {
                                                     environment.variables =
                                                         {
-                                                            SALLY = implementation-parameters.config.sally.frontend.mobile ;
+                                                            SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
                                                         } ;
                                                     systemd =
                                                         {
