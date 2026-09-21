@@ -27,7 +27,7 @@
                                                     ] ;
                                                     environment.variables =
                                                         {
-                                                            SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
+                                                            # SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
                                                             DOWNLOAD_NODE = implementation-parameters.config.sally.download-dependencies.frontend.mobile ;
                                                         } ;
                                                     systemd =
@@ -113,6 +113,7 @@
                                                                                                                     -type f \
                                                                                                                     \( -name '*.lock' -o -name 'gc.properties' \) \
                                                                                                                     -delete
+                                                                                                                chmod --recursive a+rX gradle-dependencies
                                                                                                                 git add gradle-dependencies
                                                                                                                 rm --recursive .gradle
                                                                                                                 git commit -m "$1" --allow-empty-message
