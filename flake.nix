@@ -105,6 +105,8 @@
                                                                                                                 cd frontend/mobile
                                                                                                                 GRADLE_USER_HOME="$( mktemp --dry-run )" || failure 6182679945594691
                                                                                                                 export GRADLE_USER_HOME
+                                                                                                                echo "PWD=$(pwd)"
+                                                                                                                echo "GRADLE_USER_HOME=$GRADLE_USER_HOME"
                                                                                                                 trap cleanup EXIT
                                                                                                                 gradle help dependencies
                                                                                                                 rm -rf gradle-dependencies
