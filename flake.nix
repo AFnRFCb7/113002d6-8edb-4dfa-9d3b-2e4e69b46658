@@ -27,7 +27,7 @@
                                                     ] ;
                                                     environment.variables =
                                                         {
-                                                            SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
+                                                            # SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
                                                             DOWNLOAD_NODE = implementation-parameters.config.sally.download-dependencies.frontend.mobile ;
                                                         } ;
                                                     systemd =
@@ -103,19 +103,25 @@
                                                                                                         text =
                                                                                                             ''
                                                                                                                 cd frontend/mobile
-                                                                                                                GRADLE_USER_HOME="$( mktemp --dry-run )" || failure 6182679945594691
+
+                                                                                                                GRADLE_USER_HOME="$(mktemp --directory)" || failure 6182679945594691
                                                                                                                 export GRADLE_USER_HOME
                                                                                                                 trap cleanup EXIT
-                                                                                                                gradle help dependencies
-                                                                                                                rm -rf gradle-dependencies
+
+                                                                                                                gradle build
+
+                                                                                                                rm --recursive --force gradle-dependencies
                                                                                                                 cp --recursive "$GRADLE_USER_HOME/caches/modules-2" gradle-dependencies/
+
                                                                                                                 find gradle-dependencies \
                                                                                                                     -type f \
                                                                                                                     \( -name '*.lock' -o -name 'gc.properties' \) \
                                                                                                                     -delete
-                                                                                                                chmod --recursive a+rwX "$GRADLE_USER_HOME"
+
+                                                                                                                chmod --recursive a+rwX gradle-dependencies
+
                                                                                                                 git add gradle-dependencies
-                                                                                                                rm --recursive .gradle
+                                                                                                                rm --recursive --force .gradle
                                                                                                                 git commit -m "$1" --allow-empty-message
                                                                                                             '' ;
                                                                                                 } ;
