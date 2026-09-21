@@ -188,36 +188,12 @@
                                                                                                         ''
                                                                                                             WORK_DIR="$(mktemp --directory)" || failure 3113983533329552
                                                                                                             echo "WORK_DIR=$WORK_DIR"
-
                                                                                                             cd "$WORK_DIR"
-
                                                                                                             cp --recursive "${./frontend/mobile}/." .
-
                                                                                                             rm --recursive --force gradle-dependencies
-                                                                                                            mkdir --parents gradle-dependencies
-                                                                                                            chmod a+rwx gradle-dependencies
-
-                                                                                                            cp --recursive \
-                                                                                                                "${./frontend/mobile}/gradle-dependencies/." \
-                                                                                                                gradle-dependencies/
-
-                                                                                                            chmod --recursive a+rwX gradle-dependencies
-
-                                                                                                            GRADLE_USER_HOME="$WORK_DIR/gradle-home"
-                                                                                                            export GRADLE_USER_HOME
-
-                                                                                                            mkdir --parents "$GRADLE_USER_HOME/caches/modules-2"
-
-                                                                                                            cp --recursive \
-                                                                                                                gradle-dependencies/. \
-                                                                                                                "$GRADLE_USER_HOME/caches/modules-2/"
-
-                                                                                                            chmod --recursive a+rwX "$GRADLE_USER_HOME"
-
-                                                                                                            gradle --offline assembleDebug
-
+                                                                                                            ./gradlew build --offline
                                                                                                             mkdir --parents "$out"
-                                                                                                            cp app/build/outputs/apk/debug/app-debug.apk "$out/"
+                                                                                                            cp build/outputs/... "$out"/
                                                                                                         '' ;
                                                                                         type = implementation-parameters.lib.types.package ;
                                                                                     } ;
