@@ -188,12 +188,21 @@
                                                                                                         ''
                                                                                                             WORK_DIR="$(mktemp --directory)" || failure 3113983533329552
                                                                                                             echo "WORK_DIR=$WORK_DIR"
+
                                                                                                             cd "$WORK_DIR"
+
                                                                                                             cp --recursive "${./frontend/mobile}/." .
-                                                                                                            export GRADLE_USER_HOME="$WORK_DIR/gradle-dependencies"
+
+                                                                                                            export HOME="$WORK_DIR/home"
+                                                                                                            export GRADLE_USER_HOME="$HOME/.gradle"
+
+                                                                                                            mkdir --parents "$GRADLE_USER_HOME"
+                                                                                                            cp --recursive "${./gradle-dependencies}/." "$GRADLE_USER_HOME/caches/"
+
                                                                                                             gradle build --offline
+
                                                                                                             mkdir --parents "$out"
-                                                                                                            cp build/outputs/... "$out"/
+                                                                                                            cp --recursive build/outputs/. "$out"/
                                                                                                         '' ;
                                                                                         type = implementation-parameters.lib.types.package ;
                                                                                     } ;
