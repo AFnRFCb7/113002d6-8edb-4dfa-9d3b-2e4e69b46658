@@ -197,13 +197,16 @@
                                                                                                                 "${./frontend/mobile}/gradle-dependencies" \
                                                                                                                 "$WORK_DIR/"
 
+                                                                                                            chmod --recursive a+rwX \
+                                                                                                                "$WORK_DIR/gradle-dependencies"
+
                                                                                                             GRADLE_USER_HOME="$WORK_DIR/gradle-home"
                                                                                                             export GRADLE_USER_HOME
 
                                                                                                             mkdir --parents "$GRADLE_USER_HOME/caches/modules-2"
 
                                                                                                             cp --recursive \
-                                                                                                                gradle-dependencies/. \
+                                                                                                                "$WORK_DIR/gradle-dependencies/." \
                                                                                                                 "$GRADLE_USER_HOME/caches/modules-2/"
 
                                                                                                             chmod --recursive a+rwX \
