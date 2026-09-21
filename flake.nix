@@ -24,14 +24,14 @@
                                                         {
                                                             services =
                                                                 implementation-parameters.lib.mkIf
-                                                                    implementation-parameters.config.trump5000.services.enable
+                                                                    implementation-parameters.config.sally.services.enable
                                                                         {
-                                                                            trump5000-server =
+                                                                            sally-server =
                                                                                 implementation-parameters.lib.mkIf
-                                                                                    implementation-parameters.config.trump5000.services.server.enable
+                                                                                    implementation-parameters.config.sally.services.server.enable
                                                                                     {
                                                                                         after = [ "network.target" ] ;
-                                                                                        name = "${ implementation-parameters.config.trump5000.services.server.name }.service" ;
+                                                                                        name = "${ implementation-parameters.config.sally.services.server.name }.service" ;
                                                                                         serviceConfig =
                                                                                             {
                                                                                                 DynamicUser = true ;
@@ -41,7 +41,7 @@
                                                                                                             root-parameters.lazy-shell-application
                                                                                                                 {
                                                                                                                     name = "ExecStartPre" ;
-                                                                                                                    mounts = { trump5000 = { source = "/run/trump5000" ; type = "bind" ; } ; } ;
+                                                                                                                    mounts = { sally = { source = "/run/sally" ; type = "bind" ; } ; } ;
                                                                                                                     post = null ;
                                                                                                                     runtime-inputs = pkgs : [ pkgs.gnutar pkgs.xz ] ;
                                                                                                                     text =
@@ -50,7 +50,7 @@
                                                                                                                                 --extract \
                                                                                                                                 --xz \
                                                                                                                                 --file ${ self }/express.tar.xz \
-                                                                                                                                --directory /mounts/trump5000/
+                                                                                                                                --directory /mounts/sally/
                                                                                                                         '' ;
                                                                                                                 } ;
                                                                                                         in "${ application }/bin/ExecStartPre" ;
@@ -60,16 +60,16 @@
                                                                                                             root-parameters.lazy-shell-application
                                                                                                                 {
                                                                                                                     name = "ExecStart" ;
-                                                                                                                    mounts = { trump5000 = { source = "/run/trump5000" ; type = "bind" ; } ; } ;
+                                                                                                                    mounts = { sally = { source = "/run/sally" ; type = "bind" ; } ; } ;
                                                                                                                     post = null ;
                                                                                                                     runtime-inputs = pkgs : [ pkgs.nodejs ] ;
                                                                                                                     text =
                                                                                                                         ''
-                                                                                                                            node /mounts/trump5000/server.js
+                                                                                                                            node /mounts/sally/server.js ${ builtins.toString config.sally.services.server.port }
                                                                                                                         '' ;
                                                                                                                 } ;
                                                                                                         in "${ application }/bin/ExecStart" ;
-                                                                                                RuntimeDirectory = "trump5000" ;
+                                                                                                RuntimeDirectory = "sally" ;
                                                                                             } ;
                                                                                         wantedBy = [ "multi-user.target" ] ;
                                                                                     } ;
@@ -78,7 +78,7 @@
                                                 } ;
                                             options =
                                                 {
-                                                    trump5000 =
+                                                    sally =
                                                         {
                                                             services =
                                                                 {
@@ -86,7 +86,8 @@
                                                                     server =
                                                                         {
                                                                             enable = implementation-parameters.lib.mkOption { default = true ; type = lib.types.bool ; } ;
-                                                                            name = implementation-parameters.lib.mkOption { default = "trump5000-server" ; type = lib.types.str ; } ;
+                                                                            name = implementation-parameters.lib.mkOption { default = "sally-server" ; type = lib.types.str ; } ;
+                                                                            port = implementation-parameters.lib.mkOption { default = 10652 ; type = lib.types.int ; } ;
                                                                         } ;
                                                                 } ;
                                                         } ;
@@ -137,15 +138,15 @@
                                                                         [
                                                                             check-parameters.test-setup
                                                                                 [
-                                                                                    ''${ check-parameters.client }.wait_for_unit("trump5000-server.service")''
-                                                                                    ''${ check-parameters.client }.wait_for_open_port(3000)''
+                                                                                    ''${ check-parameters.client }.wait_for_unit("sally-server.service")''
+                                                                                    ''${ check-parameters.client }.wait_for_open_port(10652)''
                                                                                 ]
                                                                         ] ;
                                                                 writeShellApplication = check-parameters.writeShellApplication ;
                                                             }
                                                             {
                                                                 mounts = { } ;
-                                                                name = "trump5000" ;
+                                                                name = "sally" ;
                                                                 runtime-inputs = pkgs : [ pkgs.coreutils pkgs.curl ] ;
                                                                 text = "curl http://127.0.0.1:3000/hello?name=4646461779242742 2> /dev/null" ;
                                                             }
