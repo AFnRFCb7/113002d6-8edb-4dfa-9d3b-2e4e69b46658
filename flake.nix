@@ -93,18 +93,29 @@
                                                                                 implementation-parameters.lib.mkOption
                                                                                     {
                                                                                         default =
-                                                                                            implementation-parameters.pkgs.runCommand
-                                                                                                "sally"
-                                                                                                { nativeBuildInputs = [ implementation-parameters.pkgs.findutils implementation-parameters.pkgs.coreutils implementation-parameters.pkgs.gradle ( failure 1862736323979915 ) ] ; }
-                                                                                                ''
-                                                                                                    WORK_DIR="$( mktemp --directory )" || failure 3113983533329552
-                                                                                                    cd "$WORK_DIR"
-                                                                                                    cp --recursive ${ ./frontend/mobile }/* .
-                                                                                                    find . >&2
-                                                                                                    gradle assembleDebug
-                                                                                                    mkdir --parents $out
-                                                                                                    cp app/build/outputs/apk/debug/app-debug.apk $out/
-                                                                                                '' ;
+                                                                                            let
+                                                                                                androidComposition =
+                                                                                                    implementation-parameters.pkgs.androidenv.composeAndroidPackages
+                                                                                                        {
+                                                                                                            platformVersions = [ "35" ] ;
+                                                                                                            buildToolsVersions = [ "35.0.0" ] ;
+                                                                                                        } ;
+
+                                                                                                androidSdk =
+                                                                                                    androidComposition.androidsdk ;
+                                                                                                in
+                                                                                                    implementation-parameters.pkgs.runCommand
+                                                                                                        "sally"
+                                                                                                        { nativeBuildInputs = [ implementation-parameters.pkgs.findutils androidSdk implementation-parameters.pkgs.coreutils implementation-parameters.pkgs.gradle ( failure 1862736323979915 ) ] ; }
+                                                                                                        ''
+                                                                                                            WORK_DIR="$( mktemp --directory )" || failure 3113983533329552
+                                                                                                            cd "$WORK_DIR"
+                                                                                                            cp --recursive ${ ./frontend/mobile }/* .
+                                                                                                            find . >&2
+                                                                                                            gradle assembleDebug
+                                                                                                            mkdir --parents $out
+                                                                                                            cp app/build/outputs/apk/debug/app-debug.apk $out/
+                                                                                                        '' ;
                                                                                         type = implementation-parameters.lib.types.package ;
                                                                                     } ;
                                                                         } ;
