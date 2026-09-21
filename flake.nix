@@ -26,10 +26,7 @@
                                                             SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
                                                         } ;
                                                     systemd =
-                                                        {    export GRADLE_USER_HOME=$TMPDIR/gradle
-    mkdir --parents $GRADLE_USER_HOME
-
-    cd ${ ./frontend/mobile }
+                                                        {
                                                             services =
                                                                 implementation-parameters.lib.mkIf
                                                                     implementation-parameters.config.sally.services.enable
