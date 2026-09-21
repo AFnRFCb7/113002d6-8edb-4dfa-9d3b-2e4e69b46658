@@ -97,9 +97,9 @@
                                                                                                 "sally"
                                                                                                 { nativeBuildInputs = [ implementation-parameters.pkgs.coreutils implementation-parameters.pkgs.gradle ( failure 1862736323979915 ) ] ; }
                                                                                                 ''
-                                                                                                    GRADLE_USER_HOME="$( mktemp --directory )" || failure 5664515665769644
-                                                                                                    export GRADLE_USER_HOME
-                                                                                                    cd ${ ./frontend/mobile }
+                                                                                                    WORK_DIR="$( mktemp --directory )" || failure 3113983533329552
+                                                                                                    cd "$WORK_DIR"
+                                                                                                    cp --recursive ${ ./frontend/mobile } .
                                                                                                     gradle assembleDebug
                                                                                                     mkdir --parents $out
                                                                                                     cp app/build/outputs/apk/debug/app-debug.apk $out/
