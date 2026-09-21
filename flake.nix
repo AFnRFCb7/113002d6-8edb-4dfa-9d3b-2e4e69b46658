@@ -187,17 +187,17 @@
                                                                                                         }
                                                                                                         ''
                                                                                                             WORK_DIR="$( mktemp --directory )" || failure 3113983533329552
-                                                                                                            chmod a+rwX "$WORK_DIR"
+                                                                                                            chmod -R a+rwX "$WORK_DIR"
                                                                                                             echo "WORK_DIR=$WORK_DIR"
                                                                                                             cd "$WORK_DIR"
                                                                                                             cp --recursive ${ ./frontend/mobile }/* .
-                                                                                                            chmod a+rwX "$WORK_DIR"
+                                                                                                            chmod -R a+rwX "$WORK_DIR"
                                                                                                             cp --recursive ${ ./frontend/mobile }/gradle-dependencies "$WORK_DIR/"
-                                                                                                            chmod a+rwX "$WORK_DIR"
+                                                                                                            chmod -R a+rwX "$WORK_DIR"
                                                                                                             GRADLE_USER_HOME="$WORK_DIR/gradle-home"
                                                                                                             export GRADLE_USER_HOME
                                                                                                             cp --recursive gradle-dependencies "$GRADLE_USER_HOME/caches/modules-2"
-                                                                                                            chmod a+rwX "$WORK_DIR"
+                                                                                                            chmod -R a+rwX "$WORK_DIR"
                                                                                                             gradle --offline assembleDebug
                                                                                                             mkdir --parents $out
                                                                                                             cp app/build/outputs/apk/debug/app-debug.apk $out/
