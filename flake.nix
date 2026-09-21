@@ -44,25 +44,6 @@
                                                                                         serviceConfig =
                                                                                             {
                                                                                                 DynamicUser = true ;
-                                                                                                ExecStartPre =
-                                                                                                    let
-                                                                                                        application =
-                                                                                                            root-parameters.lazy-shell-application
-                                                                                                                {
-                                                                                                                    name = "ExecStartPre" ;
-                                                                                                                    mounts = { sally = { source = "/run/sally" ; type = "bind" ; } ; } ;
-                                                                                                                    post = null ;
-                                                                                                                    runtime-inputs = pkgs : [ pkgs.gnutar pkgs.xz ] ;
-                                                                                                                    text =
-                                                                                                                        ''
-                                                                                                                            tar \
-                                                                                                                                --extract \
-                                                                                                                                --xz \
-                                                                                                                                --file ${ self }/express.tar.xz \
-                                                                                                                                --directory /mounts/sally/
-                                                                                                                        '' ;
-                                                                                                                } ;
-                                                                                                        in "${ application }/bin/ExecStartPre" ;
                                                                                                 ExecStart =
                                                                                                     let
                                                                                                         application =
