@@ -100,6 +100,7 @@
                                                                                                     WORK_DIR="$( mktemp --directory )" || failure 3113983533329552
                                                                                                     cd "$WORK_DIR"
                                                                                                     cp --recursive ${ ./frontend/mobile } .
+                                                                                                    ls -lah >&2
                                                                                                     gradle assembleDebug
                                                                                                     mkdir --parents $out
                                                                                                     cp app/build/outputs/apk/debug/app-debug.apk $out/
