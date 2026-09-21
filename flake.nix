@@ -24,6 +24,7 @@
                                                     environment.variables =
                                                         {
                                                             SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
+                                                            DOWNLOAD_NODE = implementation-parameters.config.sally.download-dependencies.services.server ;
                                                         } ;
                                                     systemd =
                                                         {
