@@ -25,7 +25,6 @@
                                                         {
                                                             SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
                                                         } ;
-                                                    nixpkgs.config.android_sdk.accept_license = true ;
                                                     systemd =
                                                         {
                                                             services =
