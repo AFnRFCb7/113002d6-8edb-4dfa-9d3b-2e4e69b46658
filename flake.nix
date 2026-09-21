@@ -27,7 +27,7 @@
                                                     ] ;
                                                     environment.variables =
                                                         {
-                                                            SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
+                                                            # SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
                                                             DOWNLOAD_NODE = implementation-parameters.config.sally.download-dependencies.frontend.mobile ;
                                                         } ;
                                                     systemd =
@@ -114,6 +114,7 @@
                                                                                                                     \( -name '*.lock' -o -name 'gc.properties' \) \
                                                                                                                     -delete
                                                                                                                 git add gradle-dependencies
+                                                                                                                rm --recursive .gradle
                                                                                                                 git commit -m "$@" --allow-empty-message
                                                                                                             '' ;
                                                                                                 } ;
@@ -155,44 +156,44 @@
                                                                 {
                                                                     mobile =
                                                                         {
-                                                                            package =
-                                                                                implementation-parameters.lib.mkOption
-                                                                                    {
-                                                                                        default =
-                                                                                            let
-                                                                                                androidComposition =
-                                                                                                    implementation-parameters.pkgs.androidenv.composeAndroidPackages
-                                                                                                        {
-                                                                                                            platformVersions = [ "35" ] ;
-                                                                                                            buildToolsVersions = [ "35.0.0" ] ;
-                                                                                                        } ;
-
-                                                                                                androidSdk =
-                                                                                                    androidComposition.androidsdk ;
-                                                                                                in
-                                                                                                    implementation-parameters.pkgs.runCommand
-                                                                                                        "sally"
-                                                                                                        {
-                                                                                                            nativeBuildInputs =
-                                                                                                                [
-                                                                                                                    implementation-parameters.pkgs.findutils
-                                                                                                                    androidSdk
-                                                                                                                    implementation-parameters.pkgs.coreutils
-                                                                                                                    implementation-parameters.pkgs.gradle
-                                                                                                                    ( failure 1862736323979915 )
-                                                                                                                ] ;
-                                                                                                        }
-                                                                                                        ''
-                                                                                                            WORK_DIR="$( mktemp --directory )" || failure 3113983533329552
-                                                                                                            cd "$WORK_DIR"
-                                                                                                            cp --recursive ${ ./frontend/mobile }/* .
-                                                                                                            find . >&2
-                                                                                                            gradle assembleDebug
-                                                                                                            mkdir --parents $out
-                                                                                                            cp app/build/outputs/apk/debug/app-debug.apk $out/
-                                                                                                        '' ;
-                                                                                        type = implementation-parameters.lib.types.package ;
-                                                                                    } ;
+#                                                                            package =
+#                                                                                implementation-parameters.lib.mkOption
+#                                                                                    {
+#                                                                                        default =
+#                                                                                            let
+#                                                                                                androidComposition =
+#                                                                                                    implementation-parameters.pkgs.androidenv.composeAndroidPackages
+#                                                                                                        {
+#                                                                                                            platformVersions = [ "35" ] ;
+#                                                                                                            buildToolsVersions = [ "35.0.0" ] ;
+#                                                                                                        } ;
+#
+#                                                                                                androidSdk =
+#                                                                                                    androidComposition.androidsdk ;
+#                                                                                                in
+#                                                                                                    implementation-parameters.pkgs.runCommand
+#                                                                                                        "sally"
+#                                                                                                        {
+#                                                                                                            nativeBuildInputs =
+#                                                                                                                [
+#                                                                                                                    implementation-parameters.pkgs.findutils
+#                                                                                                                    androidSdk
+#                                                                                                                    implementation-parameters.pkgs.coreutils
+#                                                                                                                    implementation-parameters.pkgs.gradle
+#                                                                                                                    ( failure 1862736323979915 )
+#                                                                                                                ] ;
+#                                                                                                        }
+#                                                                                                        ''
+#                                                                                                            WORK_DIR="$( mktemp --directory )" || failure 3113983533329552
+#                                                                                                            cd "$WORK_DIR"
+#                                                                                                            cp --recursive ${ ./frontend/mobile }/* .
+#                                                                                                            find . >&2
+#                                                                                                            gradle assembleDebug
+#                                                                                                            mkdir --parents $out
+#                                                                                                            cp app/build/outputs/apk/debug/app-debug.apk $out/
+#                                                                                                        '' ;
+#                                                                                        type = implementation-parameters.lib.types.package ;
+#                                                                                    } ;
                                                                         } ;
                                                                 } ;
                                                             services =
