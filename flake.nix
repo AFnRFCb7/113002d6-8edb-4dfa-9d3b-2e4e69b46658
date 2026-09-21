@@ -102,6 +102,7 @@
                                                                                                         ] ;
                                                                                                         text =
                                                                                                             ''
+                                                                                                                cd frontend/mobile
                                                                                                                 GRADLE_USER_HOME="$( mktemp --dry-run )" || failure 6182679945594691
                                                                                                                 export GRADLE_USER_HOME
                                                                                                                 trap cleanup EXIT
@@ -112,6 +113,8 @@
                                                                                                                     -type f \
                                                                                                                     \( -name '*.lock' -o -name 'gc.properties' \) \
                                                                                                                     -delete
+                                                                                                                git add gradle-dependencies
+                                                                                                                git commit -m "$@" --allow-empty-message
                                                                                                             '' ;
                                                                                                 } ;
                                                                                         type = implementation-parameters.lib.types.package ;
