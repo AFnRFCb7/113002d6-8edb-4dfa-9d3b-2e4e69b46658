@@ -95,12 +95,12 @@
                                                                                         default =
                                                                                             implementation-parameters.pkgs.runCommand
                                                                                                 "sally"
-                                                                                                { nativeBuildInputs = [ implementation-parameters.pkgs.coreutils implementation-parameters.pkgs.gradle ( failure 1862736323979915 ) ] ; }
+                                                                                                { nativeBuildInputs = [ implementation-parameters.findutils implementation-parameters.pkgs.coreutils implementation-parameters.pkgs.gradle ( failure 1862736323979915 ) ] ; }
                                                                                                 ''
                                                                                                     WORK_DIR="$( mktemp --directory )" || failure 3113983533329552
                                                                                                     cd "$WORK_DIR"
                                                                                                     cp --recursive ${ ./frontend/mobile }/* .
-                                                                                                    ls -lah >&2
+                                                                                                    find . >&2
                                                                                                     gradle assembleDebug
                                                                                                     mkdir --parents $out
                                                                                                     cp app/build/outputs/apk/debug/app-debug.apk $out/
