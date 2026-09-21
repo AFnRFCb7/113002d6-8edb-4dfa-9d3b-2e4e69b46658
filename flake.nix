@@ -193,7 +193,7 @@
                                                                                                             GRADLE_USER_HOME="$WORK_DIR/gradle-home"
                                                                                                             export GRADLE_USER_HOME
                                                                                                             cp --recursive gradle-dependencies "$GRADLE_USER_HOME/caches/modules-2"
-                                                                                                            chmod -r a+u+w "$GRADLE_USER_HOME"
+                                                                                                            chmod a+rwX "$WORK_DIR"
                                                                                                             gradle --offline assembleDebug
                                                                                                             mkdir --parents $out
                                                                                                             cp app/build/outputs/apk/debug/app-debug.apk $out/
