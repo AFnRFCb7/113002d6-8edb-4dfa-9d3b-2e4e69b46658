@@ -148,13 +148,21 @@
                                                                 mounts = { } ;
                                                                 name = "sally" ;
                                                                 runtime-inputs = pkgs : [ pkgs.coreutils pkgs.curl ] ;
-                                                                text = "curl http://127.0.0.1:3000/hello?name=4646461779242742 2> /dev/null" ;
+                                                                text =
+                                                                    ''
+                                                                        curl --silent --fail http://127.0.0.1:10652/hello?name=4646461779242742 2> /dev/null
+                                                                        curl --silent --fail --request POST http://127.0.0.1:10652/login 2> /dev/null
+                                                                    '' ;
                                                             }
                                                             {
                                                                 arguments = [ ] ;
                                                                 standard-error = "" ;
                                                                 standard-input = null ;
-                                                                standard-output = "hi 4646461779242742" ;
+                                                                standard-output =
+                                                                    ''
+                                                                        hi 4646461779242742
+                                                                        login
+                                                                    '' ;
                                                                 status = 0 ;
                                                             } ;
                                         implementation = implementation ;
