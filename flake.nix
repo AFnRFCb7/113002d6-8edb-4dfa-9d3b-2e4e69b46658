@@ -190,7 +190,6 @@
                                                                                                             echo "WORK_DIR=$WORK_DIR"
                                                                                                             cd "$WORK_DIR"
                                                                                                             cp --recursive "${./frontend/mobile}/." .
-                                                                                                            rm --recursive --force gradle-dependencies
                                                                                                             ./gradlew build --offline
                                                                                                             mkdir --parents "$out"
                                                                                                             cp build/outputs/... "$out"/
