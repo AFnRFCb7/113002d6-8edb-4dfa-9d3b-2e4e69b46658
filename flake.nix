@@ -115,7 +115,7 @@
                                                                                                                     git commit -m "$@" --allow-empty
                                                                                                                 '' ;
                                                                                                 } ;
-                                                                                        type = implementation-parameters.lib.package ;
+                                                                                        type = implementation-parameters.lib.types.package ;
                                                                                     } ;
                                                                         } ;
                                                                 } ;
