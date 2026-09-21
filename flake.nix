@@ -261,8 +261,7 @@
                                                                 standard-input = null ;
                                                                 standard-output =
                                                                     ''
-                                                                        hi 4646461779242742
-                                                                        login'' ;
+                                                                        hi 4646461779242742'' ;
                                                                 status = 0 ;
                                                             } ;
                                         implementation = implementation ;
