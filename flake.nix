@@ -80,16 +80,29 @@
                                                 {
                                                     sally =
                                                         {
+                                                            frontend =
+                                                                {
+                                                                    mobile =
+                                                                        {
+                                                                            package =
+                                                                                implementation-parameters.lib.mkOption
+                                                                                    {
+                                                                                        default =
+                                                                                            implementation-parameters.pkgs.runCommand
+                                                                                                "sally"
+                                                                                                { nativeBuildInputs = [ implementation-parameters.pkgs.gradle ] ; }
+                                                                                                ''
+                                                                                                    gradle assembleDebug
+                                                                                                    mkdir --parents $out
+                                                                                                    cp app/build/outputs/apk/debug/app-debug.apk $out/
+                                                                                                '' ;
+                                                                                        type = implementation-parameters.lib.types.package ;
+                                                                                    } ;
+                                                                        } ;
+                                                                } ;
                                                             services =
                                                                 {
                                                                     enable = implementation-parameters.lib.mkOption { default = true ; type = lib.types.bool ; } ;
-                                                                    frontend =
-                                                                        {
-                                                                            mobile =
-                                                                                {
-
-                                                                                } ;
-                                                                        } ;
                                                                     server =
                                                                         {
                                                                             enable = implementation-parameters.lib.mkOption { default = true ; type = lib.types.bool ; } ;
@@ -169,8 +182,7 @@
                                                                 standard-output =
                                                                     ''
                                                                         hi 4646461779242742
-                                                                        login
-                                                                    '' ;
+                                                                        login'' ;
                                                                 status = 0 ;
                                                             } ;
                                         implementation = implementation ;
