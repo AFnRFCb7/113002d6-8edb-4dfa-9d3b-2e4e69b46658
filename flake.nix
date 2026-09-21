@@ -190,6 +190,7 @@
                                                                                                             echo "WORK_DIR=$WORK_DIR"
                                                                                                             cd "$WORK_DIR"
                                                                                                             cp --recursive "${./frontend/mobile}/." .
+                                                                                                            export GRADLE_USER_HOME="$WORK_DIR/gradle-dependencies"
                                                                                                             gradle build --offline
                                                                                                             mkdir --parents "$out"
                                                                                                             cp build/outputs/... "$out"/
