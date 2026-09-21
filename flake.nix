@@ -103,10 +103,9 @@
                                                                                                         text =
                                                                                                             ''
                                                                                                                 cd frontend/mobile
-                                                                                                                GRADLE_USER_HOME="$( mktemp --dry-run )" || failure 6182679945594691
+                                                                                                                GRADLE_USER_HOME="$( mktemp --directory )" || failure 6182679945594691
+                                                                                                                rm "$GRADLE_USER_HOME"
                                                                                                                 export GRADLE_USER_HOME
-                                                                                                                echo "PWD=$(pwd)"
-                                                                                                                echo "GRADLE_USER_HOME=$GRADLE_USER_HOME"
                                                                                                                 trap cleanup EXIT
                                                                                                                 gradle help dependencies
                                                                                                                 rm -rf gradle-dependencies
@@ -194,7 +193,7 @@
                                                                                                             GRADLE_USER_HOME="$WORK_DIR/gradle-home"
                                                                                                             export GRADLE_USER_HOME
                                                                                                             cp --recursive gradle-dependencies "$GRADLE_USER_HOME/caches/modules-2"
-                                                                                                            chmod -r a+u+w "$GRADLE_USER_HOME/caches/modules-2"
+                                                                                                            chmod -r a+u+w "$GRADLE_USER_HOME"
                                                                                                             gradle --offline assembleDebug
                                                                                                             mkdir --parents $out
                                                                                                             cp app/build/outputs/apk/debug/app-debug.apk $out/
