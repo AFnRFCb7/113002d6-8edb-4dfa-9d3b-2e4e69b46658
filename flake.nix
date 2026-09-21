@@ -85,41 +85,115 @@
                                                 {
                                                     sally =
                                                         {
-                                                            frontend =
+                                                            download-dependencies =
                                                                 {
-                                                                    mobile =
+                                                                    services =
                                                                         {
-                                                                            package =
+                                                                            server =
                                                                                 implementation-parameters.lib.mkOption
                                                                                     {
                                                                                         default =
-                                                                                            let
-                                                                                                androidComposition =
-                                                                                                    implementation-parameters.pkgs.androidenv.composeAndroidPackages
-                                                                                                        {
-                                                                                                            platformVersions = [ "35" ] ;
-                                                                                                            buildToolsVersions = [ "35.0.0" ] ;
-                                                                                                        } ;
-
-                                                                                                androidSdk =
-                                                                                                    androidComposition.androidsdk ;
-                                                                                                in
-                                                                                                    implementation-parameters.pkgs.runCommand
-                                                                                                        "sally"
-                                                                                                        { nativeBuildInputs = [ implementation-parameters.pkgs.findutils androidSdk implementation-parameters.pkgs.coreutils implementation-parameters.pkgs.gradle ( failure 1862736323979915 ) ] ; }
-                                                                                                        ''
-                                                                                                            WORK_DIR="$( mktemp --directory )" || failure 3113983533329552
-                                                                                                            cd "$WORK_DIR"
-                                                                                                            cp --recursive ${ ./frontend/mobile }/* .
-                                                                                                            find . >&2
-                                                                                                            gradle assembleDebug
-                                                                                                            mkdir --parents $out
-                                                                                                            cp app/build/outputs/apk/debug/app-debug.apk $out/
-                                                                                                        '' ;
-                                                                                        type = implementation-parameters.lib.types.package ;
+                                                                                            implementation-parameters.pkgs.writeShellApplication
+                                                                                                {
+                                                                                                    name = "dependencies" ;
+                                                                                                    runtimeInputs = [ pkgs.git pkgs.nodejs ] ;
+                                                                                                    text =
+                                                                                                        let
+                                                                                                            package =
+                                                                                                                {
+                                                                                                                    dependencies =
+                                                                                                                        {
+                                                                                                                            express = "^5.1.0" ;
+                                                                                                                        } ;
+                                                                                                                } ;
+                                                                                                            in
+                                                                                                                ''
+                                                                                                                    cat ${ builtins.toFile "package.json" ( builtins.toJSON package ) } > package.json
+                                                                                                                    node install
+                                                                                                                    git add package.json package-lock.json .node_modules
+                                                                                                                    git commit -m "$@" --allow-empty
+                                                                                                                '' ;
+                                                                                                } ;
+                                                                                        type = implementation-parameters.lib.package ;
                                                                                     } ;
                                                                         } ;
                                                                 } ;
+#                                                            frontend =
+#                                                                {
+#                                                                    mobile =
+#                                                                        {
+#                                                                            download =
+#                                                                                implementation-parameters.lib.mkOption
+#                                                                                    {
+#                                                                                        default =
+#                                                                                            implementation-parameters.pkgs.writeShellApplication
+#                                                                                                {
+#                                                                                                    name = "download" ;
+#                                                                                                    runtimeInputs =
+#                                                                                                        [
+#                                                                                                            implementation-parameters.pkgs.coreutils
+#                                                                                                            implementation-parameters.pkgs.findutils
+#                                                                                                            implementation-parameters.pkgs.gradle
+#                                                                                                            ( failure 4734451342324564 )
+#                                                                                                        ] ;
+#                                                                                                        text =
+#                                                                                                            ''
+#                                                                                                                GRADLE_USER_HOME="$( mktemp --dry-run )" || failure 6182679945594691
+#                                                                                                                export GRADLE_USER_HOME
+#                                                                                                                trap "rm --recursive --force $GRADLE_USER_HOME" EXIT
+#                                                                                                                rm --recursive --force "$GRADLE_USER_HOME"
+#                                                                                                                gradle assembleDebug
+#                                                                                                                rm -rf gradle-dependencies
+#                                                                                                                mkdir --parents gradle-dependencies
+#                                                                                                                cp --recursive "$GRADLE_USER_HOME/caches/modules-2" gradle-dependencies/
+#                                                                                                                find gradle-dependencies \
+#                                                                                                                    -type f \
+#                                                                                                                    \( -name '*.lock' -o -name 'gc.properties' \) \
+#                                                                                                                    -delete
+#                                                                                                            '' ;
+#                                                                                                } ;
+#                                                                                        type = implementation-parameters.lib.types.package ;
+#                                                                                    } ;
+#                                                                            package =
+#                                                                                implementation-parameters.lib.mkOption
+#                                                                                    {
+#                                                                                        default =
+#                                                                                            let
+#                                                                                                androidComposition =
+#                                                                                                    implementation-parameters.pkgs.androidenv.composeAndroidPackages
+#                                                                                                        {
+#                                                                                                            platformVersions = [ "35" ] ;
+#                                                                                                            buildToolsVersions = [ "35.0.0" ] ;
+#                                                                                                        } ;
+#
+#                                                                                                androidSdk =
+#                                                                                                    androidComposition.androidsdk ;
+#                                                                                                in
+#                                                                                                    implementation-parameters.pkgs.runCommand
+#                                                                                                        "sally"
+#                                                                                                        {
+#                                                                                                            nativeBuildInputs =
+#                                                                                                                [
+#                                                                                                                    implementation-parameters.pkgs.findutils
+#                                                                                                                    androidSdk
+#                                                                                                                    implementation-parameters.pkgs.coreutils
+#                                                                                                                    implementation-parameters.pkgs.gradle
+#                                                                                                                    ( failure 1862736323979915 )
+#                                                                                                                ] ;
+#                                                                                                        }
+#                                                                                                        ''
+#                                                                                                            WORK_DIR="$( mktemp --directory )" || failure 3113983533329552
+#                                                                                                            cd "$WORK_DIR"
+#                                                                                                            cp --recursive ${ ./frontend/mobile }/* .
+#                                                                                                            find . >&2
+#                                                                                                            gradle assembleDebug
+#                                                                                                            mkdir --parents $out
+#                                                                                                            cp app/build/outputs/apk/debug/app-debug.apk $out/
+#                                                                                                        '' ;
+#                                                                                        type = implementation-parameters.lib.types.package ;
+#                                                                                    } ;
+#                                                                        } ;
+#                                                                } ;
                                                             services =
                                                                 {
                                                                     enable = implementation-parameters.lib.mkOption { default = true ; type = lib.types.bool ; } ;
