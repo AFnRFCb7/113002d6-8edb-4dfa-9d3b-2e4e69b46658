@@ -113,8 +113,8 @@
                                                                                                             in
                                                                                                                 ''
                                                                                                                     cat ${ builtins.toFile "package.json" ( builtins.toJSON package ) } > package.json
-                                                                                                                    node install
-                                                                                                                    git add package.json package-lock.json .node_modules
+                                                                                                                    npm install
+                                                                                                                    git add .node_modules
                                                                                                                     git commit -m "$@" --allow-empty
                                                                                                                 '' ;
                                                                                                 } ;
