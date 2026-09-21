@@ -193,12 +193,15 @@
 
                                                                                                             cp --recursive "${./frontend/mobile}/." .
 
-                                                                                                            cp --recursive \
-                                                                                                                "${./frontend/mobile}/gradle-dependencies" \
-                                                                                                                "$WORK_DIR/"
+                                                                                                            rm --recursive --force gradle-dependencies
+                                                                                                            mkdir --parents gradle-dependencies
+                                                                                                            chmod a+rwx gradle-dependencies
 
-                                                                                                            chmod --recursive a+rwX \
-                                                                                                                "$WORK_DIR/gradle-dependencies"
+                                                                                                            cp --recursive \
+                                                                                                                "${./frontend/mobile}/gradle-dependencies/." \
+                                                                                                                gradle-dependencies/
+
+                                                                                                            chmod --recursive a+rwX gradle-dependencies
 
                                                                                                             GRADLE_USER_HOME="$WORK_DIR/gradle-home"
                                                                                                             export GRADLE_USER_HOME
@@ -206,17 +209,15 @@
                                                                                                             mkdir --parents "$GRADLE_USER_HOME/caches/modules-2"
 
                                                                                                             cp --recursive \
-                                                                                                                "$WORK_DIR/gradle-dependencies/." \
+                                                                                                                gradle-dependencies/. \
                                                                                                                 "$GRADLE_USER_HOME/caches/modules-2/"
 
-                                                                                                            chmod --recursive a+rwX \
-                                                                                                                "$GRADLE_USER_HOME"
+                                                                                                            chmod --recursive a+rwX "$GRADLE_USER_HOME"
 
                                                                                                             gradle --offline assembleDebug
 
                                                                                                             mkdir --parents "$out"
                                                                                                             cp app/build/outputs/apk/debug/app-debug.apk "$out/"
-
                                                                                                         '' ;
                                                                                         type = implementation-parameters.lib.types.package ;
                                                                                     } ;
