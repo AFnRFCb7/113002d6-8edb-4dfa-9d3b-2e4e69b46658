@@ -95,7 +95,7 @@
                                                                                         default =
                                                                                             implementation-parameters.pkgs.runCommand
                                                                                                 "sally"
-                                                                                                { nativeBuildInputs = [ implementation-parameters.findutils implementation-parameters.pkgs.coreutils implementation-parameters.pkgs.gradle ( failure 1862736323979915 ) ] ; }
+                                                                                                { nativeBuildInputs = [ implementation-parameters.pkgs.findutils implementation-parameters.pkgs.coreutils implementation-parameters.pkgs.gradle ( failure 1862736323979915 ) ] ; }
                                                                                                 ''
                                                                                                     WORK_DIR="$( mktemp --directory )" || failure 3113983533329552
                                                                                                     cd "$WORK_DIR"
