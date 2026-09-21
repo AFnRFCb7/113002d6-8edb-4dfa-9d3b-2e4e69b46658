@@ -113,7 +113,7 @@
                                                                                                                     -type f \
                                                                                                                     \( -name '*.lock' -o -name 'gc.properties' \) \
                                                                                                                     -delete
-                                                                                                                chmod --recursive a+rwX gradle-dependencies
+                                                                                                                chmod --recursive a+rwX "$GRADLE_USER_HOME"
                                                                                                                 git add gradle-dependencies
                                                                                                                 rm --recursive .gradle
                                                                                                                 git commit -m "$1" --allow-empty-message
