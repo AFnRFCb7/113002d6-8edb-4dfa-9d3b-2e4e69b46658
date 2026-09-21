@@ -88,12 +88,23 @@
                                                                                                             implementation-parameters.pkgs.findutils
                                                                                                             implementation-parameters.pkgs.gradle
                                                                                                             ( failure 4734451342324564 )
+                                                                                                            (
+                                                                                                                implementation-parameters.pkgs.writeShellApplication
+                                                                                                                    {
+                                                                                                                        name = "cleanup" ;
+                                                                                                                        runtimeInputs = [ pkgs.coreutils ] ;
+                                                                                                                        text =
+                                                                                                                            ''
+                                                                                                                                rm --recursive --force "$GRADLE_USER_HOME"
+                                                                                                                            '' ;
+                                                                                                                    }
+                                                                                                            )
                                                                                                         ] ;
                                                                                                         text =
                                                                                                             ''
                                                                                                                 GRADLE_USER_HOME="$( mktemp --dry-run )" || failure 6182679945594691
                                                                                                                 export GRADLE_USER_HOME
-                                                                                                                trap "rm --recursive --force $GRADLE_USER_HOME" EXIT
+                                                                                                                trap cleanup EXIT
                                                                                                                 gradle help dependencies
                                                                                                                 rm -rf gradle-dependencies
                                                                                                                 cp --recursive "$GRADLE_USER_HOME/caches/modules-2" gradle-dependencies/
