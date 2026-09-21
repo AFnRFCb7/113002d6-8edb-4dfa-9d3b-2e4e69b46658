@@ -103,8 +103,7 @@
                                                                                                         text =
                                                                                                             ''
                                                                                                                 cd frontend/mobile
-                                                                                                                GRADLE_USER_HOME="$( mktemp --directory )" || failure 6182679945594691
-                                                                                                                rm "$GRADLE_USER_HOME"
+                                                                                                                GRADLE_USER_HOME="$( mktemp --dry-run )" || failure 6182679945594691
                                                                                                                 export GRADLE_USER_HOME
                                                                                                                 trap cleanup EXIT
                                                                                                                 gradle help dependencies
