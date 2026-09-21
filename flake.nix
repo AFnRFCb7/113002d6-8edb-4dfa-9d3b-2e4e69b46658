@@ -20,6 +20,10 @@
                                         {
                                             config =
                                                 {
+                                                    environment.variables =
+                                                        {
+                                                            SALLY = implementation-parameters.config.sally.frontend.mobile ;
+                                                        } ;
                                                     systemd =
                                                         {
                                                             services =
@@ -92,6 +96,7 @@
                                                                                                 "sally"
                                                                                                 { nativeBuildInputs = [ implementation-parameters.pkgs.gradle ] ; }
                                                                                                 ''
+                                                                                                    cd ${ ./frontend/mobile }
                                                                                                     gradle assembleDebug
                                                                                                     mkdir --parents $out
                                                                                                     cp app/build/outputs/apk/debug/app-debug.apk $out/
@@ -173,6 +178,7 @@
                                                                         curl --silent --fail http://127.0.0.1:10652/hello?name=4646461779242742 2> /dev/null
                                                                         echo
                                                                         curl --silent --fail --request POST http://127.0.0.1:10652/login 2> /dev/null
+                                                                        test -s "$SALLY/app-debug.apk"
                                                                     '' ;
                                                             }
                                                             {
