@@ -114,7 +114,7 @@
                                                                                                                 ''
                                                                                                                     cat ${ builtins.toFile "package.json" ( builtins.toJSON package ) } > package.json
                                                                                                                     npm install
-                                                                                                                    git add .node_modules
+                                                                                                                    git add node_modules
                                                                                                                     git commit -m "$@" --allow-empty
                                                                                                                 '' ;
                                                                                                 } ;
