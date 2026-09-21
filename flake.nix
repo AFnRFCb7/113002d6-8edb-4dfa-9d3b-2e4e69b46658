@@ -187,6 +187,7 @@
                                                                                                         }
                                                                                                         ''
                                                                                                             WORK_DIR="$( mktemp --directory )" || failure 3113983533329552
+                                                                                                            echo "WORK_DIR=$WORK_DIR"
                                                                                                             cd "$WORK_DIR"
                                                                                                             cp --recursive ${ ./frontend/mobile }/* .
                                                                                                             cp --recursive ${ ./frontend/mobile }/gradle-dependencies "$WORK_DIR/"
