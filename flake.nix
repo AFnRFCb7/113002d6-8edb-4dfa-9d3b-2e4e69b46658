@@ -212,7 +212,10 @@
                                                                                                                     cp --recursive "${./frontend/mobile/gradle-dependencies}/." "$GRADLE_USER_HOME/caches/"
                                                                                                                     chmod --recursive u+rwX "$GRADLE_USER_HOME"
 
-                                                                                                                    gradle build --offline
+                                                                                                                    gradle \
+                                                                                                                        -Pandroid.aapt2FromMavenOverride="$ANDROID_HOME/libexec/android-sdk/build-tools/35.0.0/aapt2" \
+                                                                                                                        build \
+                                                                                                                        --offline
 
                                                                                                                     mkdir --parents "$out"
                                                                                                                     cp --recursive build/outputs/. "$out"/
