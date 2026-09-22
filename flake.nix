@@ -120,7 +120,9 @@
                                                                                                                         export GRADLE_USER_HOME
                                                                                                                         trap cleanup EXIT
 
-                                                                                                                        gradle build
+                                                                                                                        gradle \
+                                                                                                                            -Pandroid.aapt2FromMavenOverride="$ANDROID_HOME/build-tools/35.0.0/aapt2" \
+                                                                                                                            build
 
                                                                                                                         rm --recursive --force gradle-dependencies
                                                                                                                         cp --recursive "$GRADLE_USER_HOME/caches/modules-2" gradle-dependencies/
