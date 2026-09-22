@@ -182,15 +182,6 @@
                                                                                             {
                                                                                                 default =
                                                                                                     let
-                                                                                                        androidComposition =
-                                                                                                            implementation-parameters.pkgs.androidenv.composeAndroidPackages
-                                                                                                                {
-                                                                                                                    platformVersions = [ "35" ] ;
-                                                                                                                    buildToolsVersions = [ "35.0.0" ] ;
-                                                                                                                } ;
-
-                                                                                                        androidSdk =
-                                                                                                            androidComposition.androidsdk ;
                                                                                                         in
                                                                                                             implementation-parameters.pkgs.runCommand
                                                                                                                 "sally"
