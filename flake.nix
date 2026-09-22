@@ -27,7 +27,7 @@
                                                     ] ;
                                                     environment.variables =
                                                         {
-                                                            SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
+                                                            # SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
                                                             DOWNLOAD_NODE = implementation-parameters.config.sally.download-dependencies.frontend.mobile ;
                                                         } ;
                                                     systemd =
@@ -125,7 +125,7 @@
                                                                                                                         build
 
                                                                                                                     rm --recursive --force gradle-dependencies
-                                                                                                                    cp --recursive "$GRADLE_USER_HOME/caches/modules-2" gradle-dependencies/
+                                                                                                                    cp --recursive "$GRADLE_USER_HOME/caches/." gradle-dependencies/
 
                                                                                                                     find gradle-dependencies \
                                                                                                                         -type f \
