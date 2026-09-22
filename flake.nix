@@ -189,6 +189,7 @@
                                                                                                                     implementation-parameters.pkgs.gradle
                                                                                                                     ( failure 1862736323979915 )
                                                                                                                 ] ;
+                                                                                                            ANDROID_HOME = "${ androidSdk }" ;
                                                                                                         }
                                                                                                         ''
                                                                                                             WORK_DIR="$(mktemp --directory)" || failure 3113983533329552
