@@ -219,6 +219,7 @@
 
                                                                                                                     mkdir --parents "$GRADLE_USER_HOME"
                                                                                                                     cp --recursive "${./frontend/mobile/gradle-dependencies}/." "$GRADLE_USER_HOME/caches/"
+                                                                                                                    chmod --recursive u+rwX "$GRADLE_USER_HOME"
 
                                                                                                                     gradle build --offline
 
