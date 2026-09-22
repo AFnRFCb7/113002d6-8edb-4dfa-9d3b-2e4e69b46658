@@ -192,6 +192,7 @@
                                                                                                             ANDROID_HOME = "${ androidSdk }" ;
                                                                                                         }
                                                                                                         ''
+                                                                                                            export ANDROID_HOME="${ androidSdk }"
                                                                                                             WORK_DIR="$(mktemp --directory)" || failure 3113983533329552
                                                                                                             echo "WORK_DIR=$WORK_DIR"
 
