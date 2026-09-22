@@ -111,33 +111,33 @@
                                                                                                                             }
                                                                                                                     )
                                                                                                                 ] ;
-                                                                                                                text =
-                                                                                                                    ''
-                                                                                                                        export ANDROID_HOME=${ androidSdk }
-                                                                                                                        cd frontend/mobile
+                                                                                                            text =
+                                                                                                                ''
+                                                                                                                    export ANDROID_HOME=${ androidSdk }
+                                                                                                                    cd frontend/mobile
 
-                                                                                                                        GRADLE_USER_HOME="$(mktemp --directory)" || failure 6182679945594691
-                                                                                                                        export GRADLE_USER_HOME
-                                                                                                                        trap cleanup EXIT
+                                                                                                                    GRADLE_USER_HOME="$(mktemp --directory)" || failure 6182679945594691
+                                                                                                                    export GRADLE_USER_HOME
+                                                                                                                    trap cleanup EXIT
 
-                                                                                                                        gradle \
-                                                                                                                            -Pandroid.aapt2FromMavenOverride="$ANDROID_HOME/libexec/android-sdk/build-tools/35.0.0/aapt2"
-                                                                                                                            build
+                                                                                                                    gradle \
+                                                                                                                        -Pandroid.aapt2FromMavenOverride="$ANDROID_HOME/libexec/android-sdk/build-tools/35.0.0/aapt2" \
+                                                                                                                        build
 
-                                                                                                                        rm --recursive --force gradle-dependencies
-                                                                                                                        cp --recursive "$GRADLE_USER_HOME/caches/modules-2" gradle-dependencies/
+                                                                                                                    rm --recursive --force gradle-dependencies
+                                                                                                                    cp --recursive "$GRADLE_USER_HOME/caches/modules-2" gradle-dependencies/
 
-                                                                                                                        find gradle-dependencies \
-                                                                                                                            -type f \
-                                                                                                                            \( -name '*.lock' -o -name 'gc.properties' \) \
-                                                                                                                            -delete
+                                                                                                                    find gradle-dependencies \
+                                                                                                                        -type f \
+                                                                                                                        \( -name '*.lock' -o -name 'gc.properties' \) \
+                                                                                                                        -delete
 
-                                                                                                                        chmod --recursive a+rwX gradle-dependencies
+                                                                                                                    chmod --recursive a+rwX gradle-dependencies
 
-                                                                                                                        git add gradle-dependencies
-                                                                                                                        rm --recursive --force .gradle
-                                                                                                                        git commit -m "$1" --allow-empty-message
-                                                                                                                    '' ;
+                                                                                                                    git add gradle-dependencies
+                                                                                                                    rm --recursive --force .gradle
+                                                                                                                    git commit -m "$1" --allow-empty-message
+                                                                                                                '' ;
                                                                                                         } ;
                                                                                                 type = implementation-parameters.lib.types.package ;
                                                                                             } ;
