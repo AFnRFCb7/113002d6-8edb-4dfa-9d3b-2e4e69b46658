@@ -204,6 +204,7 @@
                                                                                                                     cd "$WORK_DIR"
 
                                                                                                                     cp --recursive "${./frontend/mobile}/." .
+                                                                                                                    chmod --recursive u+rwX "$WORK_DIR"
 
                                                                                                                     export HOME="$WORK_DIR/home"
                                                                                                                     export GRADLE_USER_HOME="$HOME/.gradle"
