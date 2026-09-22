@@ -218,7 +218,7 @@
                                                                                                                     export GRADLE_USER_HOME="$HOME/.gradle"
 
                                                                                                                     mkdir --parents "$GRADLE_USER_HOME"
-                                                                                                                    cp --recursive "${./gradle-dependencies}/." "$GRADLE_USER_HOME/caches/"
+                                                                                                                    cp --recursive "${./frontend/mobile/gradle-dependencies}/." "$GRADLE_USER_HOME/caches/"
 
                                                                                                                     gradle build --offline
 
