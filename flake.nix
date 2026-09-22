@@ -121,7 +121,7 @@
                                                                                                                         trap cleanup EXIT
 
                                                                                                                         gradle \
-                                                                                                                            -Pandroid.aapt2FromMavenOverride="$ANDROID_HOME/build-tools/35.0.0/aapt2" \
+                                                                                                                            -Pandroid.aapt2FromMavenOverride="$ANDROID_HOME/libexec/android-sdk/build-tools/35.0.0/aapt2"
                                                                                                                             build
 
                                                                                                                         rm --recursive --force gradle-dependencies
