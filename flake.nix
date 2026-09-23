@@ -99,7 +99,7 @@
                                                             } ;
                                                     androidSdk =
 builtins.trace
-  (builtins.toString (androidComposition.linkSystemImages {
+  ( builtins.typeOf (androidComposition.linkSystemImages {
     check = false;
     images = [ androidComposition.androidsdk ];
   }))
