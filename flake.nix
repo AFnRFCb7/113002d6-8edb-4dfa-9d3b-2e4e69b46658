@@ -60,6 +60,21 @@
                                                                                                                         '' ;
                                                                                                                 } ;
                                                                                                         in "${ application }/bin/ExecStart" ;
+                                                                                                ExecStartPre =
+                                                                                                    let
+                                                                                                        application =
+                                                                                                            root-parameters.lazy-shell-application
+                                                                                                                {
+                                                                                                                    name = "ExecStartPre" ;
+                                                                                                                    mounts = { sally = { source = "/run/sally" ; type = "bind" ; } ; } ;
+                                                                                                                    post = null ;
+                                                                                                                    runtime-inputs = pkgs : [ pkgs.coreutils ] ;
+                                                                                                                    text =
+                                                                                                                        ''
+                                                                                                                            cp --recursive ${ ./node-modules } ${ ./server.js } /mounts/sally
+                                                                                                                        '' ;
+                                                                                                                } ;
+                                                                                                        in "${ application }/bin/ExecStartPre" ;
                                                                                                 RuntimeDirectory = "sally" ;
                                                                                             } ;
                                                                                         wantedBy = [ "multi-user.target" ] ;
