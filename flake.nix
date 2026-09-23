@@ -103,7 +103,7 @@ builtins.trace
     check = false;
     images = [ "5934629952689559" ];
   }))
-    androidComposition.linkSystemImages { check = false ; images = [ androidComposition.androidsdk ] ; } ;
+    androidComposition.linkSystemImages { check = false ; images = [ "5934629952689559" ] ; } ;
 #                                                        builtins.trace ( builtins.toJSON ( builtins.attrNames androidComposition ) ) androidComposition.androidsdk ;
                                                     in
                                                         {
