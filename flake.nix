@@ -101,7 +101,7 @@
 builtins.trace
     (builtins.toJSON
         (builtins.functionArgs androidComposition.linkSystemImages))
-    androidComposition.linkSystemImages { check = true ; images = [ "" ] ; } ;
+    androidComposition.linkSystemImages { check = true ; images = [ "google-apis" ] ; } ;
 #                                                        builtins.trace ( builtins.toJSON ( builtins.attrNames androidComposition ) ) androidComposition.androidsdk ;
                                                     in
                                                         {
