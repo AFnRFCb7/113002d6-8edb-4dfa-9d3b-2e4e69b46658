@@ -98,7 +98,7 @@
                                                                 abiVersions = [ "x86_64" ] ;
                                                             } ;
                                                     androidSdk =
-                                                        androidComposition.androidsdk ;
+                                                        builtins.trace ( builtins.toJSON ( builtins.attrNames androidComposition ) ) androidComposition.androidsdk ;
                                                     in
                                                         {
                                                             sally =
