@@ -53,9 +53,10 @@
                                                                                                                     name = "ExecStart" ;
                                                                                                                     mounts = { sally = { source = "/run/sally" ; type = "ro-bind" ; } ; } ;
                                                                                                                     post = null ;
-                                                                                                                    runtime-inputs = pkgs : [ pkgs.nodejs ] ;
+                                                                                                                    runtime-inputs = pkgs : [ pkgs.findutils pkgs.nodejs ] ;
                                                                                                                     text =
                                                                                                                         ''
+                                                                                                                            find /mounts/sally
                                                                                                                             node /mounts/sally/server.js ${ builtins.toString config.sally.services.server.port }
                                                                                                                         '' ;
                                                                                                                 } ;
