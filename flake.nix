@@ -100,10 +100,10 @@
                                                     androidSdk =
 builtins.trace
   ( builtins.toString (androidComposition.linkSystemImages {
-    check = false;
+    check = true ;
     images = [ "5934629952689559" ];
   }))
-    androidComposition.linkSystemImages { check = false ; images = [ "5934629952689559" ] ; } ;
+    androidComposition.linkSystemImages { check = true ; images = [ "5934629952689559" ] ; } ;
 #                                                        builtins.trace ( builtins.toJSON ( builtins.attrNames androidComposition ) ) androidComposition.androidsdk ;
                                                     in
                                                         {
