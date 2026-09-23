@@ -98,8 +98,7 @@
                                                                 systemImageTypes = [ "google_apis" ] ;
                                                                 abiVersions = [ "x86_64" ] ;
                                                             } ;
-                                                    androidSdk =
-                                                        builtins.trace ( builtins.toJSON ( builtins.attrNames androidComposition ) ) androidComposition.androidsdk ;
+                                                    androidSdk = androidComposition.androidsdk ;
                                                     in
                                                         {
                                                             sally =
