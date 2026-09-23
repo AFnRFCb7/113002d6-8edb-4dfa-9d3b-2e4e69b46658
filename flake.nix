@@ -93,6 +93,9 @@
                                                             {
                                                                 platformVersions = [ "35" ] ;
                                                                 buildToolsVersions = [ "35.0.0" ] ;
+                                                                includeEmulator = true ;
+                                                                systemImageTypes = [ "google_apis" ] ;
+                                                                abiVersions = [ "x86_64" ] ;
                                                             } ;
                                                     androidSdk =
                                                         androidComposition.androidsdk ;
@@ -203,9 +206,26 @@
                                                                                                     name = "emulator" ;
                                                                                                     runtimeInputs =
                                                                                                         [
+                                                                                                            androidSdk
                                                                                                         ] ;
                                                                                                     text =
                                                                                                         ''
+                                                                                                            export ANDROID_HOME="${androidSdk}/libexec/android-sdk"
+
+                                                                                                            export ANDROID_AVD_HOME="$TMPDIR/android-avd"
+                                                                                                            mkdir -p "$ANDROID_AVD_HOME"
+
+                                                                                                            avdmanager create avd \
+                                                                                                                --force \
+                                                                                                                --name sally \
+                                                                                                                --package "system-images;android-35;google_apis;x86_64" \
+                                                                                                                --device "pixel"
+
+                                                                                                            emulator \
+                                                                                                                -avd sally \
+                                                                                                                -no-snapshot \
+                                                                                                                -no-audio \
+                                                                                                                -no-boot-anim
                                                                                                         '' ;
                                                                                                 } ;
                                                                                         type = implementation-parameters.lib.types.package ;
