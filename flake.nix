@@ -69,22 +69,12 @@
                                                 } ;
                                             options =
                                                 let
-androidComposition =
-    builtins.trace
-        (builtins.toJSON {
-            allowUnfree = implementation-parameters.pkgs.config.allowUnfree;
-            acceptLicense = implementation-parameters.pkgs.config.android_sdk.accept_license;
-        })
-        implementation-parameters.pkgs.androidenv.composeAndroidPackages {
-            platformVersions = [ "35" ];
-            buildToolsVersions = [ "35.0.0" ];
-        };
-#                                                    androidComposition =
-#                                                        implementation-parameters.pkgs.androidenv.composeAndroidPackages
-#                                                            {
-#                                                                platformVersions = [ "35" ] ;
-#                                                                buildToolsVersions = [ "35.0.0" ] ;
-#                                                            } ;
+                                                    androidComposition =
+                                                        implementation-parameters.pkgs.androidenv.composeAndroidPackages
+                                                            {
+                                                                platformVersions = [ "35" ] ;
+                                                                buildToolsVersions = [ "35.0.0" ] ;
+                                                            } ;
                                                     androidSdk =
                                                         androidComposition.androidsdk ;
                                                     in
