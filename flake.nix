@@ -72,7 +72,8 @@
                                                                                                                     runtime-inputs = pkgs : [ pkgs.coreutils ] ;
                                                                                                                     text =
                                                                                                                         ''
-                                                                                                                            cp --recursive ${ ./node_modules } ${ ./server.js } /mounts/sally
+                                                                                                                            cp --recursive ${ ./node_modules } /mounts/sally/node_modules
+                                                                                                                            cp ${ ./server.js } /mounts/sally/server.js
                                                                                                                         '' ;
                                                                                                                 } ;
                                                                                                         in "${ application }/bin/ExecStartPre" ;
