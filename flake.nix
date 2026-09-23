@@ -206,14 +206,16 @@
                                                                                                     name = "emulator" ;
                                                                                                     runtimeInputs =
                                                                                                         [
+                                                                                                            pkgs.coreutils
                                                                                                             androidSdk
+                                                                                                            ( failure 3197695537713754 )
                                                                                                         ] ;
                                                                                                     text =
                                                                                                         ''
                                                                                                             export ANDROID_HOME="${androidSdk}/libexec/android-sdk"
 
-                                                                                                            export ANDROID_AVD_HOME="$TMPDIR/android-avd"
-                                                                                                            mkdir -p "$ANDROID_AVD_HOME"
+                                                                                                            ANDROID_AVD_HOME="$( mktemp --directory )" || failure 7318874258885152
+                                                                                                            export ANDROID_AVD_HOME
 
                                                                                                             avdmanager create avd \
                                                                                                                 --force \
