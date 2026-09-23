@@ -51,7 +51,7 @@
                                                                                                             root-parameters.lazy-shell-application
                                                                                                                 {
                                                                                                                     name = "ExecStart" ;
-                                                                                                                    mounts = { sally = { source = "/run/sally" ; type = "bind" ; } ; } ;
+                                                                                                                    mounts = { sally = { source = "/run/sally" ; type = "ro-bind" ; } ; } ;
                                                                                                                     post = null ;
                                                                                                                     runtime-inputs = pkgs : [ pkgs.nodejs ] ;
                                                                                                                     text =
@@ -71,7 +71,7 @@
                                                                                                                     runtime-inputs = pkgs : [ pkgs.coreutils ] ;
                                                                                                                     text =
                                                                                                                         ''
-                                                                                                                            cp --recursive ${ ./node-modules } ${ ./server.js } /mounts/sally
+                                                                                                                            cp --recursive ${ ./node_modules } ${ ./server.js } /mounts/sally
                                                                                                                         '' ;
                                                                                                                 } ;
                                                                                                         in "${ application }/bin/ExecStartPre" ;
