@@ -99,13 +99,7 @@
                                                                 abiVersions = [ "x86_64" ] ;
                                                             } ;
                                                     androidSdk =
-builtins.trace
-  ( builtins.toString (androidComposition.linkSystemImages {
-    check = true ;
-    images = [ "5934629952689559" ];
-  }))
-    androidComposition.linkSystemImages { check = true
-#                                                        builtins.trace ( builtins.toJSON ( builtins.attrNames androidComposition ) ) androidComposition.androidsdk ;
+                                                        builtins.trace ( builtins.toJSON ( builtins.attrNames androidComposition ) ) androidComposition.androidsdk ;
                                                     in
                                                         {
                                                             sally =
