@@ -100,11 +100,7 @@
                                                     androidSdk =
 builtins.trace
     (builtins.toJSON
-        (builtins.map (x: x.name)
-            (androidComposition.linkSystemImages {
-                images = true;
-                check = false;
-            })))
+        (builtins.functionArgs androidComposition.linkSystemImages))
     androidComposition.androidsdk ;
 #                                                        builtins.trace ( builtins.toJSON ( builtins.attrNames androidComposition ) ) androidComposition.androidsdk ;
                                                     in
