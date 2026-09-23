@@ -315,7 +315,7 @@
                                                                                 curl --silent --fail http://127.0.0.1:10652/hello?name=4646461779242742 2> /dev/null
                                                                                 echo
                                                                                 curl --silent --fail --request POST http://127.0.0.1:10652/login 2> /dev/null
-                                                                                test -s "$SALLY/app-debug.apk"
+                                                                                test -s "$SALLY/apk/debug/sally-mobile-debug.apk"
                                                                             '' ;
                                                                     }
                                                                     {
