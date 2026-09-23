@@ -101,7 +101,7 @@
 builtins.trace
     (builtins.toJSON
         (builtins.attrNames androidComposition.system-images))
-    androidComposition.androidsdk
+    androidComposition.androidsdk ;
 #                                                        builtins.trace ( builtins.toJSON ( builtins.attrNames androidComposition ) ) androidComposition.androidsdk ;
                                                     in
                                                         {
