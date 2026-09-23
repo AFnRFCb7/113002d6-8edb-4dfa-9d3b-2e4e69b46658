@@ -318,7 +318,7 @@
                                                                                     check-parameters.test-setup
                                                                                         [
                                                                                             ''${ check-parameters.client }.wait_for_unit("sally-server.service")''
-                                                                                            # ''${ check-parameters.client }.wait_for_open_port(10652)''
+                                                                                            ''${ check-parameters.client }.wait_for_open_port(10652)''
                                                                                         ]
                                                                                 ] ;
                                                                         writeShellApplication = check-parameters.writeShellApplication ;
