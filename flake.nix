@@ -190,6 +190,23 @@
                                                                                             } ;
                                                                                 } ;
                                                                         } ;
+                                                                    emulator =
+                                                                        {
+                                                                            mobile =
+                                                                                implementation-parameters.lib.mkOption
+                                                                                    {
+                                                                                        default =
+                                                                                            implementation-parameters.pkgs.writeShellApplication
+                                                                                                {
+                                                                                                    name = "emulator" ;
+                                                                                                    runtimeInputs = [ ] ;
+                                                                                                    text =
+                                                                                                        ''
+                                                                                                        '' ;
+                                                                                                } ;
+                                                                                        type = implementation-parameters.lib.types.package ;
+                                                                                    } ;
+                                                                        } ;
                                                                     frontend =
                                                                         {
                                                                             mobile =
