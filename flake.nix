@@ -94,6 +94,7 @@
                                                                 platformVersions = [ "35" ] ;
                                                                 buildToolsVersions = [ "35.0.0" ] ;
                                                                 includeEmulator = true ;
+                                                                includeSystemImages = true ;
                                                                 systemImageTypes = [ "google_apis" ] ;
                                                                 abiVersions = [ "x86_64" ] ;
                                                             } ;
@@ -103,7 +104,7 @@ builtins.trace
     check = true ;
     images = [ "5934629952689559" ];
   }))
-    androidComposition.linkSystemImages { check = true ; images = [ "5934629952689559" ] ; } ;
+    androidComposition.linkSystemImages { check = true
 #                                                        builtins.trace ( builtins.toJSON ( builtins.attrNames androidComposition ) ) androidComposition.androidsdk ;
                                                     in
                                                         {
