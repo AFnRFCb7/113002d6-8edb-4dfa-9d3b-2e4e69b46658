@@ -227,7 +227,15 @@
                                                                                                                 -avd sally \
                                                                                                                 -no-snapshot \
                                                                                                                 -no-audio \
-                                                                                                                -no-boot-anim
+                                                                                                                -no-boot-anim &
+
+                                                                                                            adb wait-for-device
+
+                                                                                                            until adb shell getprop sys.boot_completed 2>/dev/null | grep -q '^1$'; do
+                                                                                                                sleep 1
+                                                                                                            done
+
+                                                                                                            adb install "${ implementation-parameters.config.sally.frontend.mobile.package }/apk/debug/sally-mobile-debug.apk"
                                                                                                         '' ;
                                                                                                 } ;
                                                                                         type = implementation-parameters.lib.types.package ;
