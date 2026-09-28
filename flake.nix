@@ -25,7 +25,7 @@
                                                         # implementation-parameters.config.sally.download-dependencies.services.server
                                                         # implementation-parameters.config.sally.download-dependencies.frontend.mobile
                                                         # implementation-parameters.config.sally.emulator.mobile
-                                                        ( implementation-parameters.config.node-package.fetch { dependencies = { express = "^5.1.0" ; } ; scripts = { start = "node server.js" ; } ; } )
+                                                        # ( implementation-parameters.config.node-package.fetch { dependencies = { express = "^5.1.0" ; } ; scripts = { start = "node server.js" ; } ; } )
                                                     ] ;
                                                     environment.variables =
                                                         {
