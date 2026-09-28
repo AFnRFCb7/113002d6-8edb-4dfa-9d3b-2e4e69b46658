@@ -34,29 +34,29 @@
                                                                 implementation-parameters.lib.mkIf
                                                                     implementation-parameters.config.sally.services.enable
                                                                         {
-                                                                            sally-server =
-                                                                                implementation-parameters.lib.mkIf
-                                                                                    implementation-parameters.config.sally.services.server.enable
-                                                                                    {
-                                                                                        after = [ "network.target" ] ;
-                                                                                        name = "${ implementation-parameters.config.sally.services.server.name }.service" ;
-                                                                                        serviceConfig =
-                                                                                            {
-                                                                                                DynamicUser = true ;
-                                                                                                ExecStart =
-                                                                                                    let
-                                                                                                        application =
-                                                                                                            implementation-parameters.config.node-package.execute
-                                                                                                                {
-                                                                                                                    command = "run start" ;
-                                                                                                                    name = "ExecStart" ;
-                                                                                                                    package = implementation-parameters.config.node-package.build ./. ;
-                                                                                                                } ;
-                                                                                                        in "${ application }/bin/ExecStart" ;
-                                                                                                RuntimeDirectory = "sally" ;
-                                                                                            } ;
-                                                                                        wantedBy = [ "multi-user.target" ] ;
-                                                                                    } ;
+#                                                                            sally-server =
+#                                                                                implementation-parameters.lib.mkIf
+#                                                                                    implementation-parameters.config.sally.services.server.enable
+#                                                                                    {
+#                                                                                        after = [ "network.target" ] ;
+#                                                                                        name = "${ implementation-parameters.config.sally.services.server.name }.service" ;
+#                                                                                        serviceConfig =
+#                                                                                            {
+#                                                                                                DynamicUser = true ;
+#                                                                                                ExecStart =
+#                                                                                                    let
+#                                                                                                        application =
+#                                                                                                            implementation-parameters.config.node-package.execute
+#                                                                                                                {
+#                                                                                                                    command = "run start" ;
+#                                                                                                                    name = "ExecStart" ;
+#                                                                                                                    package = implementation-parameters.config.node-package.build ./. ;
+#                                                                                                                } ;
+#                                                                                                        in "${ application }/bin/ExecStart" ;
+#                                                                                                RuntimeDirectory = "sally" ;
+#                                                                                            } ;
+#                                                                                        wantedBy = [ "multi-user.target" ] ;
+#                                                                                    } ;
                                                                         } ;
                                                         } ;
                                                 } ;
