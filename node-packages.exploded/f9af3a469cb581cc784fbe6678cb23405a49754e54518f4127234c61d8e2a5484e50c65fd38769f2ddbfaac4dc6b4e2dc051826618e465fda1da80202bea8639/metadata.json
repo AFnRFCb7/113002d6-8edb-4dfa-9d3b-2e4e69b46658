@@ -1,0 +1,5 @@
+{
+  "permissions": "755",
+  "tag": "node_modules/object-inspect/test/browser",
+  "type": "directory"
+}
