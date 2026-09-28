@@ -21,6 +21,10 @@
                                         {
                                             config =
                                                 {
+                                                    environment.systemPath =
+                                                        [
+                                                            ( implementation-parameters.config.node-package.fetch { dependencies = { express = "^5.1.0" ; } ; scripts = { start = "node server.js" ; } ; } )
+                                                        ] ;
                                                     environment.variables =
                                                         {
                                                             # SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
