@@ -51,20 +51,7 @@
                                                                                                 DynamicUser = true ;
                                                                                                 ExecStart =
                                                                                                     let
-                                                                                                        # application = implementation-parameters.config.node-package.execute { command = "run start" ;name = "ExecStart" ; package = implementation-parameters.config.node-package.build ; } ;
-                                                                                                        application =
-                                                                                                            root-parameters.lazy-shell-application
-                                                                                                                {
-                                                                                                                    name = "ExecStart" ;
-                                                                                                                    mounts = { sally = { source = "/run/sally" ; type = "ro-bind" ; } ; } ;
-                                                                                                                    post = null ;
-                                                                                                                    runtime-inputs = pkgs : [ pkgs.findutils pkgs.nodejs ] ;
-                                                                                                                    text =
-                                                                                                                        ''
-                                                                                                                            find /mounts/sally
-                                                                                                                            node /mounts/sally/server.js ${ builtins.toString config.sally.services.server.port }
-                                                                                                                        '' ;
-                                                                                                                } ;
+                                                                                                        application = implementation-parameters.config.node-package.execute { command = "run start" ;name = "ExecStart" ; package = implementation-parameters.config.node-package.build ; } ;
                                                                                                         in "${ application }/bin/ExecStart" ;
                                                                                                 ExecStartPre =
                                                                                                     let
