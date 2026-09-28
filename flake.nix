@@ -53,22 +53,6 @@
                                                                                                     let
                                                                                                         application = implementation-parameters.config.node-package.execute { command = "run start" ;name = "ExecStart" ; package = implementation-parameters.config.node-package.build ; } ;
                                                                                                         in "${ application }/bin/ExecStart" ;
-                                                                                                ExecStartPre =
-                                                                                                    let
-                                                                                                        application =
-                                                                                                            root-parameters.lazy-shell-application
-                                                                                                                {
-                                                                                                                    name = "ExecStartPre" ;
-                                                                                                                    mounts = { sally = { source = "/run/sally" ; type = "bind" ; } ; } ;
-                                                                                                                    post = null ;
-                                                                                                                    runtime-inputs = pkgs : [ pkgs.coreutils ] ;
-                                                                                                                    text =
-                                                                                                                        ''
-                                                                                                                            cp --recursive ${ ./node_modules } /mounts/sally/node_modules
-                                                                                                                            cp ${ ./server.js } /mounts/sally/server.js
-                                                                                                                        '' ;
-                                                                                                                } ;
-                                                                                                        in "${ application }/bin/ExecStartPre" ;
                                                                                                 RuntimeDirectory = "sally" ;
                                                                                             } ;
                                                                                         wantedBy = [ "multi-user.target" ] ;
