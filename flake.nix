@@ -168,36 +168,6 @@
                                                                                                 type = implementation-parameters.lib.types.package ;
                                                                                             } ;
                                                                                 } ;
-                                                                            services =
-                                                                                {
-                                                                                    server =
-                                                                                        implementation-parameters.lib.mkOption
-                                                                                            {
-                                                                                                default =
-                                                                                                    implementation-parameters.pkgs.writeShellApplication
-                                                                                                        {
-                                                                                                            name = "dependencies" ;
-                                                                                                            runtimeInputs = [ pkgs.git pkgs.nodejs ] ;
-                                                                                                            text =
-                                                                                                                let
-                                                                                                                    package =
-                                                                                                                        {
-                                                                                                                            dependencies =
-                                                                                                                                {
-                                                                                                                                    express = "^5.1.0" ;
-                                                                                                                                } ;
-                                                                                                                        } ;
-                                                                                                                    in
-                                                                                                                        ''
-                                                                                                                            cat ${ builtins.toFile "package.json" ( builtins.toJSON package ) } > package.json
-                                                                                                                            npm install
-                                                                                                                            git add node_modules
-                                                                                                                            git commit -m "$@" --allow-empty
-                                                                                                                        '' ;
-                                                                                                        } ;
-                                                                                                type = implementation-parameters.lib.types.package ;
-                                                                                            } ;
-                                                                                } ;
                                                                         } ;
                                                                     emulator =
                                                                         {
