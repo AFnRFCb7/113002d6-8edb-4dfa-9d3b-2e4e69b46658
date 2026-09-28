@@ -55,6 +55,7 @@
                                                                                                                     command = "run start" ;
                                                                                                                     name = "ExecStart" ;
                                                                                                                     package = implementation-parameters.config.node-package.build ./. ;
+                                                                                                                    work-directory = "/run/sally" ;
                                                                                                                 } ;
                                                                                                         in "${ application }/bin/ExecStart" ;
                                                                                                 RuntimeDirectory = "sally" ;
