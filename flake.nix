@@ -21,7 +21,7 @@
                                         {
                                             config =
                                                 {
-                                                    environment.systemPath =
+                                                    environment.systemPackages =
                                                         [
                                                             ( implementation-parameters.config.node-package.fetch { dependencies = { express = "^5.1.0" ; } ; scripts = { start = "node server.js" ; } ; } )
                                                         ] ;
