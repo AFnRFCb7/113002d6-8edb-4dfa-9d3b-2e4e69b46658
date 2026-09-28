@@ -25,14 +25,15 @@
                                                         implementation-parameters.config.sally.download-dependencies.services.server
                                                         implementation-parameters.config.sally.download-dependencies.frontend.mobile
                                                         implementation-parameters.config.sally.emulator.mobile
-                                                        ( implementation-parameters.config.node-package.fetch { dependencies = { express = "^5.1.0" ; } ; } )
+                                                        ( implementation-parameters.config.node-package.fetch { dependencies = { express = "^5.1.0" ; } ; } ljk)
                                                     ] ;
                                                     environment.variables =
                                                         {
                                                             SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
                                                             DOWNLOAD_NODE = implementation-parameters.config.sally.download-dependencies.frontend.mobile ;
                                                             EMULATOR = implementation-parameters.config.sally.emulator.mobile ;
-                                                            FETCH = implementation-parameters.config.node-package.fetch { dependencies = { express = "^5.1.0" ; } ; } ;
+                                                            FETCH = implementation-parameters.config.node-package.fetch { dependencies = { express = "^5.1.0" ; } ; scripts = { start = "node server.js" ;
+                                                            } } ;
                                                         } ;
                                                     systemd =
                                                         {
@@ -51,6 +52,7 @@
                                                                                                 DynamicUser = true ;
                                                                                                 ExecStart =
                                                                                                     let
+                                                                                                        # application = implementation-parameters.config.node-package.execute { command = "run start" ;name = "ExecStart" ; package = implementation-parameters.config.node-package.build ; } ;
                                                                                                         application =
                                                                                                             root-parameters.lazy-shell-application
                                                                                                                 {
