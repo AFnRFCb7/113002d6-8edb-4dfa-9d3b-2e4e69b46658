@@ -51,7 +51,13 @@
                                                                                                 DynamicUser = true ;
                                                                                                 ExecStart =
                                                                                                     let
-                                                                                                        application = implementation-parameters.config.node-package.execute { command = "run start" ;name = "ExecStart" ; package = implementation-parameters.config.node-package.build ; } ;
+                                                                                                        application =
+                                                                                                            implementation-parameters.config.node-package.execute
+                                                                                                                {
+                                                                                                                    command = "run start" ;
+                                                                                                                    name = "ExecStart" ;
+                                                                                                                    package = implementation-parameters.config.node-package.build ${ ./. } ;
+                                                                                                                } ;
                                                                                                         in "${ application }/bin/ExecStart" ;
                                                                                                 RuntimeDirectory = "sally" ;
                                                                                             } ;
