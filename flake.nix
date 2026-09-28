@@ -30,7 +30,7 @@
                                                             # SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
                                                             # DOWNLOAD_NODE = implementation-parameters.config.sally.download-dependencies.frontend.mobile ;
                                                             # EMULATOR = implementation-parameters.config.sally.emulator.mobile ;
-                                                            FETCH = implementation-parameters.config.node-package.fetch { dependencies = { express = "^5.1.0" ; } ; scripts = { start = "node server.js 10652" ; } ; } ;
+                                                            FETCH_JSON = implementation-parameters.config.node-package.fetch { dependencies = { express = "^5.1.0" ; } ; scripts = { start = "node server.js 10652" ; } ; } ;
                                                         } ;
                                                     systemd =
                                                         {
@@ -38,29 +38,29 @@
                                                                 implementation-parameters.lib.mkIf
                                                                     implementation-parameters.config.sally.services.enable
                                                                         {
-#                                                                            sally-server =
-#                                                                                implementation-parameters.lib.mkIf
-#                                                                                    implementation-parameters.config.sally.services.server.enable
-#                                                                                    {
-#                                                                                        after = [ "network.target" ] ;
-#                                                                                        name = "${ implementation-parameters.config.sally.services.server.name }.service" ;
-#                                                                                        serviceConfig =
-#                                                                                            {
-#                                                                                                DynamicUser = true ;
-#                                                                                                ExecStart =
-#                                                                                                    let
-#                                                                                                        application =
-#                                                                                                            implementation-parameters.config.node-package.execute
-#                                                                                                                {
-#                                                                                                                    command = "run start" ;
-#                                                                                                                    name = "ExecStart" ;
-#                                                                                                                    package = implementation-parameters.config.node-package.build ./. ;
-#                                                                                                                } ;
-#                                                                                                        in "${ application }/bin/ExecStart" ;
-#                                                                                                RuntimeDirectory = "sally" ;
-#                                                                                            } ;
-#                                                                                        wantedBy = [ "multi-user.target" ] ;
-#                                                                                    } ;
+                                                                            sally-server =
+                                                                                implementation-parameters.lib.mkIf
+                                                                                    implementation-parameters.config.sally.services.server.enable
+                                                                                    {
+                                                                                        after = [ "network.target" ] ;
+                                                                                        name = "${ implementation-parameters.config.sally.services.server.name }.service" ;
+                                                                                        serviceConfig =
+                                                                                            {
+                                                                                                DynamicUser = true ;
+                                                                                                ExecStart =
+                                                                                                    let
+                                                                                                        application =
+                                                                                                            implementation-parameters.config.node-package.execute
+                                                                                                                {
+                                                                                                                    command = "run start" ;
+                                                                                                                    name = "ExecStart" ;
+                                                                                                                    package = implementation-parameters.config.node-package.build ./. ;
+                                                                                                                } ;
+                                                                                                        in "${ application }/bin/ExecStart" ;
+                                                                                                RuntimeDirectory = "sally" ;
+                                                                                            } ;
+                                                                                        wantedBy = [ "multi-user.target" ] ;
+                                                                                    } ;
                                                                         } ;
                                                         } ;
                                                 } ;
