@@ -28,7 +28,7 @@
                                                         ] ;
                                                     environment.variables =
                                                         {
-                                                            # SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
+                                                            SALLY = implementation-parameters.config.sally.frontend.mobile.package ;
                                                             # DOWNLOAD_NODE = implementation-parameters.config.sally.download-dependencies.frontend.mobile ;
                                                             EMULATOR = implementation-parameters.config.sally.emulator.mobile ;
                                                             FETCH_JSON = implementation-parameters.config.node-package.fetch { dependencies = { express = "^5.1.0" ; } ; scripts = { start = "node server.js 10652" ; } ; } ;
