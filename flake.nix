@@ -4,7 +4,6 @@
 	    {
 	        lib =
 	            {
-	                failure ,
 	                lazy-shell-application
                 } :
                     let
@@ -101,7 +100,7 @@
                                                                                                                     implementation-parameters.pkgs.findutils
                                                                                                                     implementation-parameters.pkgs.gradle
                                                                                                                     implementation-parameters.pkgs.gnutar
-                                                                                                                    ( failure 4734451342324564 )
+                                                                                                                    ( config.failure { } )
                                                                                                                     androidSdk
                                                                                                                     (
                                                                                                                         implementation-parameters.pkgs.writeShellApplication
@@ -112,7 +111,7 @@
                                                                                                                                         implementation-parameters.pkgs.coreutils
                                                                                                                                         implementation-parameters.pkgs.git
                                                                                                                                         implementation-parameters.pkgs.jdk
-                                                                                                                                        ( failure 9891196344992798 )
+                                                                                                                                        ( config.failure { } )
                                                                                                                                     ] ;
                                                                                                                                 text =
                                                                                                                                     ''
@@ -185,7 +184,7 @@
                                                                                                         [
                                                                                                             pkgs.coreutils
                                                                                                             androidSdk
-                                                                                                            ( failure 3197695537713754 )
+                                                                                                            ( config.failure { } )
                                                                                                         ] ;
                                                                                                     text =
                                                                                                         ''
@@ -285,7 +284,7 @@
                                                                                                                             androidSdk
                                                                                                                             implementation-parameters.pkgs.coreutils
                                                                                                                             implementation-parameters.pkgs.gradle
-                                                                                                                            ( failure 1862736323979915 )
+                                                                                                                            ( config.failure { } )
                                                                                                                             (
                                                                                                                                 pkgs.writeShellApplication
                                                                                                                                     {
@@ -295,7 +294,7 @@
                                                                                                                                                 implementation-parameters.pkgs.coreutils
                                                                                                                                                 implementation-parameters.pkgs.findutils
                                                                                                                                                 implementation-parameters.pkgs.jdk
-                                                                                                                                                ( failure 3418308241641114 )
+                                                                                                                                                ( config.failure { } )
                                                                                                                                             ] ;
                                                                                                                                         text =
                                                                                                                                             ''
