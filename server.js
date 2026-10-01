@@ -9,7 +9,16 @@ app.get
                 const name = request.query.name || "world" ;
                 response.send( `hi ${ name }`) ;
             }
-    ) ;
+    ) ;'
+app.get
+    (
+        "/secret" ,
+        ( request , response ) =>
+            {
+                const name = request.query.name || "world" ;
+                response.send( `hi ${ name }`) ;
+            }
+    ) ;    '
 app.post
     (
         "/login" , ( request , response ) =>
